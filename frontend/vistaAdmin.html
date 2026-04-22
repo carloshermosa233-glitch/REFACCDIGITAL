@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://localhost:3000/js/auth-admin.js"></script>
+<title>Panel Usuario</title>
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        REFACCDIGITAL
+    </div>
+
+    <div class="user-dropdown">
+        <button class="profile-btn">
+            <div class="user-info">
+                <p class="name">Administrador</p>
+            </div>
+            <div class="avatar">
+                AD
+            </div>
+        </button>
+        
+        <div class="dropdown-menu">
+            <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
+        </div>
+    </div>
+
+</header>
+
+
+<main class="main-container">
+
+    <div class="welcome-message">
+        <h1>¡Bienvenido de Vuelta!</h1>
+        <p class="subtitle">Selecciona una opción para comenzar a trabajar.</p>
+    </div>
+
+    <nav class="main-menu">
+        <a href="Inventario.html" class="menu-option">
+            <div class="option-icon">📦</div>
+            <h3 class="option-title">Gestion de Inventario</h3>
+            <p class="option-description">Agrega un producto.</p>
+        </a>
+        <a href="actualizar-producto.html" class="menu-option">
+            <div class="option-icon">✏️</div>
+            <h3 class="option-title">Actualizacion de productos</h3>
+            <p class="option-description">Gestionar productos y stock.</p>
+        </a>
+        <a href="generar-reporte.html" class="menu-option">
+            <div class="option-icon">📊</div>
+            <h3 class="option-title">Generacion de reportes de ventas</h3>
+            <p class="option-description">Consultar historial de ventas.</p>
+        </a>
+        <a href="GestionUsuario.html" class="menu-option">
+            <div class="option-icon">👥</div>
+            <h3 class="option-title">Gestion de usuarios</h3>
+            <p class="option-description">Crea un nuevo usuario.</p>
+        </a>
+    </nav>
+
+</main>
+
+
+<footer class="footer">
+    © 2026 REFACCDIGITAL - Sistema de Punto de Venta
+</footer>
+
+<script src="http://localhost:3000/js/logout.js"></script>
+
+</body>
+</html>

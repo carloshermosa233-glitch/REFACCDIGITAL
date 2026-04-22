@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://localhost:3000/js/auth-admin.js"></script>
+<title>Gestión de Usuarios</title>
+<link rel="stylesheet" href="./css/styles.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background-color: #f4f6f9; }
+
+.section-card { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #eee; margin: 24px; }
+.section-title { font-size: 17px; font-weight: bold; color: #1f2d3d; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 13px; color: #555; font-weight: bold; }
+.form-group input, .form-group select { padding: 10px 12px; border: 1px solid #ccc; border-radius: 7px; font-size: 14px; width: 100%; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: #3498db; }
+
+.btn-add { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 7px; font-size: 14px; font-weight: bold; cursor: pointer; }
+.btn-add:hover { background: #219150; }
+
+.error-form { color: #e74c3c; font-size: 13px; margin-top: 8px; display: none; background: #fdecea; padding: 7px 12px; border-radius: 6px; }
+.success-form { color: #27ae60; font-size: 13px; margin-top: 8px; display: none; background: #eafaf1; padding: 7px 12px; border-radius: 6px; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px; }
+th { background-color: #1f2d3d; color: white; padding: 10px 12px; text-align: left; }
+td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+tr:hover td { background: #f9f9f9; }
+
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+.badge-admin { background: #d5f0e8; color: #1a7a4f; }
+.badge-vendedor { background: #dbeafe; color: #1a56a8; }
+
+.btn-delete { background: #e74c3c; color: white; border: none; padding: 5px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+.btn-delete:hover { background: #c0392b; }
+.btn-change-pass { background: #f39c12; color: white; border: none; padding: 5px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; margin-right: 4px; }
+.btn-change-pass:hover { background: #d68910; }
+
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 100; justify-content: center; align-items: center; }
+.modal-overlay.active { display: flex; }
+.modal { background: white; border-radius: 10px; padding: 28px; width: 340px; }
+.modal h3 { margin-bottom: 16px; color: #1f2d3d; }
+.modal label { font-size: 13px; color: #555; display: block; margin-bottom: 5px; margin-top: 12px; }
+.modal input { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 7px; font-size: 14px; }
+.modal-btns { display: flex; gap: 10px; margin-top: 16px; }
+.btn-confirm { flex: 1; background: #1f2d3d; color: white; border: none; padding: 10px; border-radius: 7px; cursor: pointer; font-size: 14px; }
+.btn-cancel-modal { flex: 1; background: #eee; color: #555; border: none; padding: 10px; border-radius: 7px; cursor: pointer; font-size: 14px; }
+.error-modal { color: #e74c3c; font-size: 13px; margin-top: 8px; display: none; background: #fdecea; padding: 7px 12px; border-radius: 6px; }
+
+.btn-volver { display: inline-block; margin: 0 24px 16px; padding: 8px 16px; background: #7f8c8d; color: white; border: none; border-radius: 7px; cursor: pointer; font-size: 13px; text-decoration: none; }
+.btn-volver:hover { background: #626567; }
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">REFACCDIGITAL</div>
+    <div class="user-dropdown">
+        <button class="profile-btn">
+            <div class="user-info"><p class="name">Administrador</p></div>
+            <div class="avatar">AD</div>
+        </button>
+        <div class="dropdown-menu">
+            <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
+        </div>
+    </div>
+</header>
+
+<main class="main-container">
+
+    <a href="vistaAdmin.html" class="btn-volver">← Regresar al menú</a>
+
+    <div class="section-card">
+        <div class="section-title">👥 Gestión de usuarios</div>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" id="nuevoNombre" placeholder="Nombre completo">
+            </div>
+            <div class="form-group">
+                <label>Correo electrónico (login)</label>
+                <input type="email" id="nuevoCorreo" placeholder="correo@ejemplo.com">
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="nuevoPassword" placeholder="Mínimo 4 caracteres">
+            </div>
+            <div class="form-group">
+                <label>Rol</label>
+                <select id="nuevoRol">
+                    <option value="vendedor">Vendedor</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-add" onclick="agregarUsuario()">+ Registrar empleado</button>
+        <p class="error-form" id="errorForm"></p>
+        <p class="success-form" id="successForm"></p>
+
+        <table id="tablaUsuarios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre Completo</th>
+                    <th>Correo Electrónico</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="bodyUsuarios"></tbody>
+        </table>
+    </div>
+
+</main>
+
+<footer class="footer">© 2026 REFACCDIGITAL - Sistema de Punto de Venta</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <h3>Cambiar contraseña</h3>
+        <p style="font-size:13px;color:#888;" id="modalUsuarioLabel"></p>
+        <label>Nueva contraseña</label>
+        <input type="password" id="nuevaPass" placeholder="Nueva contraseña">
+        <label>Confirmar contraseña</label>
+        <input type="password" id="confirmarPass" placeholder="Repetir contraseña">
+        <p class="error-modal" id="errorModal"></p>
+        <div class="modal-btns">
+            <button class="btn-cancel-modal" onclick="cerrarModal()">Cancelar</button>
+            <button class="btn-confirm" onclick="guardarPassword()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<script src="http://localhost:3000/js/logout.js"></script>
+<script src="http://localhost:3000/js/gestion-usuario.js"></script>
+
+</body>
+</html>

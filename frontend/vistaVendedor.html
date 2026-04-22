@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://localhost:3000/js/auth-vendedor.js"></script>
+<title>Panel Usuario</title>
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        REFACCDIGITAL
+    </div>
+
+    <div class="user-dropdown">
+        <button class="profile-btn">
+            <div class="user-info">
+                <p class="name">Vendedor</p>
+            </div>
+            <div class="avatar">
+                VE
+            </div>
+        </button>
+        
+        <div class="dropdown-menu">
+            <!-- ✅ CAMBIO 1: se agregó onclick -->
+            <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
+        </div>
+    </div>
+
+</header>
+
+
+<main class="main-container">
+
+    <div class="welcome-message">
+        <h1>¡Bienvenido de Vuelta!</h1>
+        <p class="subtitle">Selecciona una opción para comenzar a trabajar.</p>
+    </div>
+
+    <nav class="main-menu">
+        <a href="gestionar-venta.html" class="menu-option">
+            <div class="option-icon">🛒</div>
+            <h3 class="option-title">Gestion de ventas</h3>
+            <p class="option-description">Realizar una venta.</p>
+        </a>
+    </nav>
+
+</main>
+
+
+<footer class="footer">
+    © 2026 REFACCDIGITAL - Sistema de Punto de Venta
+</footer>
+
+<!-- ✅ CAMBIO 2: se agregó el script -->
+<script src="http://localhost:3000/js/logout.js"></script>
+
+</body>
+</html>
