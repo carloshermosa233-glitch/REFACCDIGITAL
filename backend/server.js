@@ -5,6 +5,8 @@ const path = require("path");
 const db = require("./config/db");
 const authRoutes = require("./routes/auth");
 const usuarioRoutes = require("./routes/usuarioRoutes");
+const productoRoutes = require("./routes/productoRoutes");
+const ventaRoutes = require("./routes/ventaRoutes");
 
 const app = express();
 
@@ -34,6 +36,8 @@ app.get("/api/test-db", async (req, res) => {
 
 app.use("/api", authRoutes);
 app.use("/api", usuarioRoutes);
+app.use("/api", productoRoutes);
+app.use("/api", ventaRoutes);
 
 app.put("/api/usuarios/:id", async (req, res) => {
   try {
