@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<script src="http://localhost:3000/js/auth-admin.js"></script>
+<title>RefaccDigital | Agregar Producto</title>
+<style>
+body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f6f9; }
+.header { background-color: #1f2d3d; color: white; padding: 15px 30px; font-size: 20px; font-weight: bold; }
+.container { display: flex; justify-content: center; margin-top: 40px; padding-bottom: 40px; }
+.card { background: white; padding: 30px; border-radius: 10px; width: 450px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); }
+.card h2 { margin-top: 0; color: #1f2d3d; }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px; color: #555; }
+input, textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
+button { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 6px; background-color: #3498db; color: white; font-size: 15px; cursor: pointer; font-weight: bold;}
+button:hover { background-color: #2980b9; }
+.btn-cancelar { background-color: #7f8c8d; margin-top: 10px; }
+.btn-cancelar:hover { background-color: #626567; }
+.feedback { margin-top: 15px; padding: 10px; border-radius: 5px; display: none; text-align: center; font-size: 14px;}
+.feedback.success { background-color: #eafaf1; color: #27ae60; display: block; }
+.feedback.error { background-color: #fdecea; color: #e74c3c; display: block; }
+</style>
+</head>
+<body>
+
+<div class="header">REFACCDIGITAL | Agregar Nuevo Producto</div>
+
+<div class="container">
+    <div class="card">
+        <h2>Datos del Producto</h2>
+        
+        <div class="form-group">
+            <label>Nombre del producto *</label>
+            <input type="text" id="nombre" placeholder="Ej. Bujía NGK" required>
+        </div>
+        <div class="form-group">
+            <label>Datos de factura</label>
+            <textarea id="descripcion" rows="3" placeholder="Descripción de factura..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Precio *</label>
+            <input type="number" id="precio" step="0.01" min="0.01" placeholder="Ej. 150.00" required>
+        </div>
+        <div class="form-group">
+            <label>Cantidad Inicial *</label>
+            <input type="number" id="cantidad" min="1" placeholder="Ej. 10" required>
+        </div>
+        <div class="form-group">
+            <label>Ubicación en inventario</label>
+            <input type="text" id="ubicacion" placeholder="Ej. Estante A1">
+        </div>
+
+        <div id="mensaje" class="feedback"></div>
+
+        <button onclick="guardarProducto()">Guardar Producto</button>
+        <button class="btn-cancelar" onclick="window.location.href='inventario.html'">Regresar a Inventario</button>
+    </div>
+</div>
+
+<script src="http://localhost:3000/js/agregar-producto.js"></script>
+
+</body>
+</html>

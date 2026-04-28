@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<script src="http://localhost:3000/js/auth-admin.js"></script>
+<title>RefaccDigital | Corte del Día</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+
+.header {
+    background-color: #1f2d3d;
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.container {
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    background-color: #1f2d3d;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.total {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.buttons {
+    margin-top: 15px;
+}
+
+button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.btn-reporte {
+    background-color: #27ae60;
+}
+
+.btn-reporte:hover {
+    background-color: #1e8449;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+    REFACCDIGITAL | Corte del Día
+</div>
+
+<div class="container">
+    <div class="card">
+
+        <h2>Ventas del día</h2>
+
+        <table id="tablaVentas">
+            <thead>
+                <tr>
+                    <th>ID Venta</th>
+                    <th>Producto</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody id="bodyVentas">
+                <!-- Las ventas se cargarán con JS -->
+            </tbody>
+        </table>
+
+        <div class="total">
+            Total del día: $<span id="total">0</span>
+        </div>
+
+        <div class="buttons">
+            <button class="btn-reporte" onclick="generarReporte()">Generar corte</button>
+            <button onclick="volver()">Regresar</button>
+        </div>
+
+    </div>
+</div>
+
+<script src="http://localhost:3000/js/corte.js"></script>
+
+</body>
+</html>

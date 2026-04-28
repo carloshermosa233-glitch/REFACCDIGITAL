@@ -1,86 +1,81 @@
-Refacc-Digital: Sistema de Control de Inventario y Ventas
+# RefaccDigital - Sistema de Punto de Venta
 
-Refacc-Digital es una plataforma integral diseñada para optimizar la administración de una refaccionaria automotriz, facilitando el control de stock, la compatibilidad de piezas y la gestión de personal. Este proyecto aplica principios de ingeniería de software para digitalizar los procesos de ventas y suministros en una interfaz moderna y eficiente.
+Este es mi sistema de control de inventario y ventas diseñado para refaccionarias en el cual nos encontramos en la Fase 2. En esta parte agregamos ya la Fase 2 de nuestro proyecto, complementando la fase 1.
 
-Actualmente, el repositorio refleja la Fase 1 del desarrollo, centrada en una arquitectura sólida que separa el núcleo lógico del servidor (Backend) de la interfaz de usuario (Frontend).
+## 🚀 Características
 
-Características Principales:
-- Autenticación Multi-rol: Inicio de sesión diferenciado para Administradores y Vendedores.
+- **Gestión de Inventario:** CRUD completo de productos (crear, leer, actualizar y eliminar).
+- **Control de Usuarios:** Sistema de autenticación con roles diferenciados.
+- **Ventas y Reportes:** Registro de transacciones y visualización del "Corte del Día".
+- **Seguridad:** Rutas protegidas por rol en el frontend y recuperación de contraseñas.
+- **Base de Datos Autogestionada:** El sistema inicializa automáticamente las tablas y datos de prueba al arrancar.
 
--Control de Acceso: Protección de rutas en el frontend según el nivel de privilegios.
+## 🛠️ Tecnologías Utilizadas
 
-- Gestión de Empleados (CRUD): Listado, creación y eliminación de usuarios desde el panel de administración.
+### Backend
+- **Node.js** & **Express**
+- **MySQL** (Base de datos relacional)
+- **mysql2/promise** (Cliente de base de datos)
+- **dotenv** (Gestión de variables de entorno)
+- **CORS** (Seguridad de peticiones)
 
-- Recuperación de Acceso: Funcionalidad para restablecer contraseñas olvidadas.
+### Frontend
+- **HTML5** & **CSS3**
+- **JavaScript (Vanilla)**
+- **Fetch API** para comunicación con el backend.
 
-Módulos Implementados
-1. Sistema de Autenticación y Seguridad
-Gestiona la entrada protegida al sistema mediante la validación de credenciales contra la base de datos.
+## 📋 Requisitos Previos
 
-Seguridad por Roles: Diferencia entre privilegios de administrador y vendedor, redirigiendo a vistaAdmin.html o vistaVendedor.html.
+- [Node.js](https://nodejs.org/) (Versión 14 o superior recomendada)
+- [MySQL Server](https://www.mysql.com/) funcionando localmente.
 
-Persistencia de Sesión: Implementado con lógica de localStorage para mantener la identidad del usuario durante la navegación.
+## ⚙️ Configuración e Instalación
 
-2. Gestión de Usuarios (Administración)
-Módulo exclusivo para el administrador encargado de la organización del capital humano.
+1. **Clonar el repositorio:**
+   ```bash
+   git clone <url-del-repositorio>
+   cd PuntoDeVentaCr
+   ```
 
-Interfaz Dinámica: Tabla interactiva en GestionUsuario.html que consume datos en tiempo real desde la API.
+2. **Configurar el Backend:**
+   Navega a la carpeta del backend e instala las dependencias:
+   ```bash
+   cd backend
+   npm install
+   ```
 
-Validación de Datos: Control de errores para evitar duplicidad de correos electrónicos y asegurar la integridad de los registros.
+3. **Variables de Entorno:**
+   Crea un archivo `.env` en la carpeta `backend/` con los siguientes parámetros:
+   ```env
+   DB_HOST=localhost
+   DB_USER=tu_usuario_mysql
+   DB_PASSWORD=tu_contraseña_mysql
+   DB_NAME=RefaccionesDB
+   DB_PORT=3306
+   ```
 
-Tecnologías Utilizadas:
+4. **Iniciar el Servidor:**
+   ```bash
+   npm start
+   ```
+   *Nota: Al iniciar, el script `initDB` creará automáticamente la base de datos y las tablas si no existen.*
 
-- Backend: Node.js y Express.
+## 🔑 Credenciales de Acceso (Prueba)
 
-- Base de Datos: MySQL (utilizando la librería mysql2).
+| Rol | Correo | Contraseña |
+| :--- | :--- | :--- |
+| **Administrador** | `carlos@admin.com` | `123456` |
+| **Vendedor** | `arlett@vendedor.com` | `123456` |
 
-- Frontend: HTML5, CSS3 y JavaScript vanilla (sin frameworks externos).
+## 📂 Estructura del Proyecto
 
-- Seguridad: Variables de entorno mediante dotenv y manejo de sesiones locales.
+- `/backend`: Contiene la API, controladores, rutas y configuración de base de datos.
+  - `/controllers`: Lógica de negocio para productos, ventas y usuarios.
+  - `/public`: Archivos JavaScript del lado del cliente y lógica de autenticación.
+- `/frontend`: Contiene las vistas HTML y estilos CSS del sistema.
 
-Estructura del Proyecto:
+## 📄 Licencia
+Este proyecto es para uso educativo en el marco de Ingeniería de Software.
 
-- El sistema sigue un patrón de arquitectura MVC (Modelo-Vista-Controlador) para asegurar la escalabilidad:
-
-Backend
-- /config: Conexión a la base de datos MySQL.
-
-- /controllers: Lógica de negocio (Auth y Usuarios).
-
-- /models: Consultas directas a la base de datos.
-
-- /routes: Definición de endpoints de la API.
-
-- server.js: Punto de entrada principal del servidor.
-
-
-
-Frontend (Carpeta public & frontend):
-
-- index.html: Formulario de login principal.
-
-- vistaAdmin.html / vistaVendedor.html: Paneles de control por rol.
-
-- GestionUsuario.html: Interfaz de administración de personal.
-
-- /js: Scripts de validación, protección de rutas y comunicación con la API.
-
-Instalación y Configuración
-1.-Clonar el repositorio y entrar a la carpeta del proyecto.
-
-2.-Instalar dependencias: npm install
-
-3.-Configurar base de datos: Importar el archivo usuarios.sql ubicado en la carpeta /Database.
-
-4.- Variables de entorno: Configurar el archivo .env con las credenciales de tu base de datos local:
-
-PORT=3000
-DB_HOST=localhost
-DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
-DB_NAME=punto_venta
-
-5.-Iniciar el servidor:
-npm start
-
-Autor: Hermosa Praxedis Carlos Rafael Hermosa Praxedis 
+## Autor
+Hermosa Praxedis Carlos Rafael

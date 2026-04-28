@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>RefaccDigital | Inventario</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+
+.header {
+    background-color: #1f2d3d;
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.container {
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.search {
+    margin-bottom: 15px;
+}
+
+input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #1f2d3d;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.buttons {
+    margin-top: 15px;
+}
+
+button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.btn-regresar {
+    background-color: #7f8c8d;
+}
+
+.btn-regresar:hover {
+    background-color: #626567;
+}
+
+.btn-accion {
+    padding: 5px 10px;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.btn-editar {
+    background-color: #f39c12;
+}
+.btn-editar:hover { background-color: #d68910; }
+
+.btn-eliminar {
+    background-color: #e74c3c;
+}
+.btn-eliminar:hover { background-color: #c0392b; }
+
+/* Modal de edición */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 100; justify-content: center; align-items: center; }
+.modal-overlay.active { display: flex; }
+.modal { background: white; border-radius: 10px; padding: 28px; width: 340px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2); }
+.modal h3 { margin-bottom: 16px; color: #1f2d3d; margin-top: 0; }
+.modal label { font-size: 13px; color: #555; display: block; margin-bottom: 5px; margin-top: 12px; font-weight: bold; }
+.modal input { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 7px; font-size: 14px; box-sizing: border-box; }
+.modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+.btn-cancel-modal { background: #eee; color: #555; border: none; flex: 1; border-radius: 7px; cursor: pointer; padding: 10px; font-size: 14px; }
+.btn-confirm { flex: 1; background: #1f2d3d; color: white; border: none; padding: 10px; border-radius: 7px; cursor: pointer; font-size: 14px; }
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+    REFACCDIGITAL | Inventario
+</div>
+
+<div class="container">
+    <div class="card">
+
+        <h2>Listado de productos</h2>
+
+        <div class="search">
+            <input type="text" id="inputBusqueda" placeholder="Buscar por nombre o ID..." onkeyup="filtrarProductos()">
+            
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Ubicación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody id="bodyInventario">
+                <!-- Los productos se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+
+        <div class="buttons">
+            <button onclick="window.location.href='agregar-producto.html'">Registrar entrada</button>
+            <button onclick="irCorte()">Corte del día</button>
+            <button class="btn-regresar" onclick="window.location.href='vistaAdmin.html'">Regresar</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal para Editar Producto -->
+<div class="modal-overlay" id="modalEditar">
+    <div class="modal">
+        <h3>Editar Producto</h3>
+        <input type="hidden" id="editId">
+        
+        <label>Nombre del Producto</label>
+        <input type="text" id="editNombre">
+        <label>Descripción</label>
+        <input type="text" id="editDescripcion">
+
+        <label>Precio</label>
+        <input type="number" id="editPrecio" step="0.01" min="0.01">
+        <label>Cantidad</label>
+        <input type="number" id="editCantidad" min="0">
+        <label>Ubicación</label>
+        <input type="text" id="editUbicacion">
+        
+        <div class="modal-btns">
+            <button class="btn-cancel-modal" onclick="cerrarModalEditar()">Cancelar</button>
+            <button class="btn-confirm" onclick="guardarEdicion()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<script src="http://localhost:3000/js/inventario.js"></script>
+
+</body>
+</html>
